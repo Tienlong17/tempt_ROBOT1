@@ -43,7 +43,7 @@ def IK(x, y , z):
         f2 = atan(z/(sqrt(x**2 + y**2 + z**2 - L1**2))) - atan((L3*sin(radians(theta_3)))/(L2 + L3*cos(radians(theta_3))))
         theta_2 = degrees(f2)
         theta = [theta_1, theta_2, theta_3]
-        print('goc 1 =',theta[0], ', goc 2 =',theta[1], ',goc 3 =',theta[2])
+        print('     goc 1 =',theta[0], ', goc 2 =',theta[1], ',goc 3 =',theta[2])
 
     except:
         print("Viet ham dua cac chan de robot 4 chan dung im")
@@ -94,7 +94,7 @@ def Quydao_trot(t, TM, s, h, a, b):
         x = -L1
         z = Congthuc_toado(t, TM, s, h, a, b)[0]
         y = Congthuc_toado(t, TM, s, h, a, b)[1]
-        print(x, y, z)
+        print("     toa do cua khau cuoi: ", x, y, z)
         IK(x, y , z)
 
 def Congthuc_toado(t, TM, s, h, a, b):    

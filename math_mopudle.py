@@ -91,6 +91,6 @@ def Congthuc_toado(t, TM, s, h, a, b):
         Ph = H - 2*h*(1 - t/TM + 1/(4*pi)*sin(4*pi*t/TM))
     if (t  >= TM + b):
         Ps = s*((2*TM - t)/TM - 1/(4*pi)*sin(4*pi*(2*TM - t)/TM)) - s/2
-        Ph = H
+        Ph = H - h + h 
     print(" Ps = ",Ps," Ph = ",Ph)
     

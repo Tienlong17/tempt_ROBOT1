@@ -4,7 +4,7 @@ import time
 
 #information detail Robot
 L1 = 7
-L2 = 10
+L2 = 20
 L3 = 21
 H = 15 #day la chieu cao dat lam gia tri khi dung tinh tu khop 1 den khau cuoi cung
 
@@ -30,14 +30,20 @@ def tempt(x, y , z):
 
 def IK(x, y , z):
     try:
-        f1 = pi - (atan(y/x) + atan(sqrt(x**2 + y**2  - L1**2)/L1))
-        f3 = acos((x**2 + y**2 + z**2 - L1**2 - L2**2 - L3**2)/(2*L2*L3))       
+        if x > 0:
+            f1 = pi - ( - atan(y/x) + atan(sqrt(x**2 + y**2  - L1**2)/L1))
+        else:
+            f1 = ( atan(y/x) - atan(sqrt(x**2 + y**2  - L1**2)/L1))
+        try:
+            f3 = acos((x**2 + y**2 + z**2 - L1**2 - L2**2 - L3**2)/(2*L2*L3))       
+        except:
+            f3 = 0
         theta_1 = degrees(f1)
         theta_3 = degrees(f3)
         f2 = atan(z/(sqrt(x**2 + y**2 + z**2 - L1**2))) - atan((L3*sin(radians(theta_3)))/(L2 + L3*cos(radians(theta_3))))
         theta_2 = degrees(f2)
         theta = [theta_1, theta_2, theta_3]
-        print('goc 1 =',theta[0], ', goc 2 =',theta[1], ', goc 3 =',theta[2])
+        print('goc 1 =',theta[0], ', goc 2 =',theta[1], ',goc 3 =',theta[2])
 
     except:
         print("Viet ham dua cac chan de robot 4 chan dung im")
@@ -55,13 +61,16 @@ def Dangdi(t):
 
 def Ditoi():
     # a la bien di toi di lui re trai re phai 
-    a = int(input("Nhap 1: Di toi \ Nhap 2: Di lui "))
+    a = int(input("Nhap 1: Di toi \ Nhap -1: Di lui "))
+    TM = float(input("Nhap chu ky TM = "))
+    s = float(input("Nhap chu ky s = "))
+    h = float(input("Nhap chu ky h = "))
+    b = float(input("Nhap do phan giai t = "))
     if a == 1:
         print("Di toi")
-        TM = float(input("Nhap chu ky TM = "))
-        s = float(input("Nhap chu ky s = "))
-        h = float(input("Nhap chu ky h = "))
-        b = float(input("Nhap do phan giai t = "))
+        Vantoc_trot(TM, s, h, a, b)
+    if a == -1:
+        print("Di lui")
         Vantoc_trot(TM, s, h, a, b)
 
 def Vantoc_trot(TM, s, h, a, b):
@@ -85,17 +94,18 @@ def Quydao_trot(t, TM, s, h, a, b):
         x = -L1
         z = Congthuc_toado(t, TM, s, h, a, b)[0]
         y = Congthuc_toado(t, TM, s, h, a, b)[1]
+        print(x, y, z)
         IK(x, y , z)
 
 def Congthuc_toado(t, TM, s, h, a, b):    
     if (t < TM/2):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
-        Ph = H - 2*h*(t/TM - 1/(4*pi)*sin(4*pi*t/TM))
+        Ph = - H + 2*h*(t/TM - 1/(4*pi)*sin(4*pi*t/TM))
     if (t >= TM/2 and t < TM + b):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
-        Ph = H - 2*h*(1 - t/TM + 1/(4*pi)*sin(4*pi*t/TM))
+        Ph = - H + 2*h*(1 - t/TM + 1/(4*pi)*sin(4*pi*t/TM))
     if (t  >= TM + b):
         Ps = s*((2*TM - t)/TM - 1/(4*pi)*sin(4*pi*(2*TM - t)/TM)) - s/2
-        Ph = H 
+        Ph = - H 
     toa_do = [Ps,Ph]
     return toa_do

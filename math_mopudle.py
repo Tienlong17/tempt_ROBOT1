@@ -8,6 +8,9 @@ L2 = 20
 L3 = 21
 H = 15 #day la chieu cao dat lam gia tri khi dung tinh tu khop 1 den khau cuoi cung
 
+A =[]
+B =[]
+
 _a = [7.4, -26.75, 5.5]
 a = np.array(_a)
 
@@ -96,6 +99,8 @@ def Quydao_trot(t, TM, s, h, a, b):
         y = Congthuc_toado(t, TM, s, h, a, b)[1]
         print("     toa do cua khau cuoi: ", x, y, z)
         IK(x, y , z)
+        A.append(y)
+        B.append(z)
 
 def Congthuc_toado(t, TM, s, h, a, b):    
     if (t < TM/2):

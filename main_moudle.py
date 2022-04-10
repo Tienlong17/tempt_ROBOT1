@@ -7,8 +7,8 @@ a = [-7.4, -26.75, 5.5]
 math_mopudle.xinchao()
 math_mopudle.IK(a[0], a[1], a[2])
 
-t =input("Nhap 1: crwal \ Nhap 2: trot  Ban chon: ")
-math_mopudle.Dangdi(int(t))
+
+math_mopudle.Dangdi()
 
 fig, (ax1, ax2, ax3) = plt.subplots(1,3, figsize=(10,4), sharey=True, dpi=120)
 

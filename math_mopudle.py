@@ -67,12 +67,13 @@ def IK(x: float, y: float , z: float):
     
     return(theta)
 
-def Dangdi(t):
+def Dangdi():
+    t =int(input("Nhap 1: crwal \ Nhap 2: trot  Ban chon: "))
     if t == 1:
         print("ban chon kieu di crawl, chua viet")
     if t == 2:
         print("ban chon kieu di trot")
-        a = int(input("Nhap 1: Di toi \ Nhap -1: Di lui "))
+        a = int(input("Nhap 1: Di toi \ Nhap -1: Di lui \ Nhap 2: xoay trai \ Nhap -2: xoay phai: Ban chon "))
         Di_chhuyen(a)
         
 
@@ -151,6 +152,9 @@ def Quydao_trot(t, TM, s, h, a, b):
         if(t < TM + b):
             E.append(y2)
             F.append(z2)
+    
+    if(a == 2):
+        a = 0
 
 def Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b):
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    

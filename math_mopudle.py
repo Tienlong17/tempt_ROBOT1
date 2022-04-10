@@ -77,16 +77,16 @@ def Dangdi(t):
         
 
 def Di_chhuyen(a):
-    '''Ham nay de di toi'''
+    '''Ham nay de di toi lui'''
     # a la bien di toi di lui re trai re phai 
     
     TM = float(input("Nhap chu ky TM = "))
     s = float(input("Nhap chu ky s = "))
     h = float(input("Nhap chu ky h = "))
     b = float(input("Nhap do phan giai t = "))
-    if a == 1:
-        print("Di toi")
-        Thoi_gian(TM, s, h, a, b)
+    
+    print("Di toi")
+    Thoi_gian(TM, s, h, a, b)
 
 def Thoi_gian(TM, s, h, a, b):
     # do phan giai thoi gian 
@@ -107,9 +107,10 @@ def Thoi_gian(TM, s, h, a, b):
 def Quydao_trot(t, TM, s, h, a, b):
     '''N/v: goi ham toa do de tra ve cac goc cho canh tay'''
     if (a == 1):
+        '''Neu a == 1 thi di toi '''
         x1 = -L1
-        z1 = round(Congthuc_toado_thuan(t, TM, s, h, a, b)[0],2)
-        y1 = round(Congthuc_toado_thuan(t, TM, s, h, a, b)[1],2)
+        z1 = round(Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b)[0],2)
+        y1 = round(Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b)[1],2)
         print("     toa do cua khau cuoi 1: x =", x1,", y =", y1,", z =", z1)
         IK(x1, y1, z1)
         if(t < TM + b):
@@ -120,15 +121,38 @@ def Quydao_trot(t, TM, s, h, a, b):
             D.append(z1)
 
         x2 = L1
-        z2 = round(Congthuc_toado_nghich(t, TM, s, h, a, b)[0],2)
-        y2 = round(Congthuc_toado_nghich(t, TM, s, h, a, b)[1],2)
+        z2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[0],2)
+        y2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[1],2)
+        print("     toa do cua khau cuoi 2: x =", x2,", y =", y2,", z =", z2)
+        IK(x2, y2, z2)
+        if(t < TM + b):
+            E.append(y2)
+            F.append(z2)
+    
+    if(a == -1):
+        '''Neu a == 1 thi di lui '''
+        x1 = -L1
+        z1 = round(Congthuc_toado_dilui_chan_truoc(t, TM, s, h, a, b)[0],2)
+        y1 = round(Congthuc_toado_dilui_chan_truoc(t, TM, s, h, a, b)[1],2)
+        print("     toa do cua khau cuoi 1: x =", x1,", y =", y1,", z =", z1)
+        IK(x1, y1, z1)
+        if(t < TM + b):
+            A.append(y1)
+            B.append(z1)
+        if(t >= TM + b and t < 2.5*TM/2):
+            C.append(y1)
+            D.append(z1)
+
+        x2 = L1
+        z2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[0],2)
+        y2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[1],2)
         print("     toa do cua khau cuoi 2: x =", x2,", y =", y2,", z =", z2)
         IK(x2, y2, z2)
         if(t < TM + b):
             E.append(y2)
             F.append(z2)
 
-def Congthuc_toado_thuan(t, TM, s, h, a, b):
+def Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b):
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
     if (t < TM/2):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
@@ -142,7 +166,7 @@ def Congthuc_toado_thuan(t, TM, s, h, a, b):
     toa_do = [Ps,Ph]
     return toa_do
 
-def Congthuc_toado_nghich(t, TM, s, h, a, b):
+def Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b):
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
     if (t < TM):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
@@ -156,3 +180,30 @@ def Congthuc_toado_nghich(t, TM, s, h, a, b):
     toa_do = [Ps,Ph]
     return toa_do
 
+def Congthuc_toado_dilui_chan_truoc(t, TM, s, h, a, b):
+    '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
+    if (t < TM/2):
+        Ps = -s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) + s/2
+        Ph = - H + 2*h*(t/TM - 1/(4*pi)*sin(4*pi*t/TM))
+    if (t >= TM/2 and t < TM + b):
+        Ps = -s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) + s/2
+        Ph = - H + 2*h*(1 - t/TM + 1/(4*pi)*sin(4*pi*t/TM))
+    if (t  >= TM + b):
+        Ps = -s*((2*TM - t)/TM - 1/(4*pi)*sin(4*pi*(2*TM - t)/TM)) + s/2
+        Ph = - H 
+    toa_do = [Ps,Ph]
+    return toa_do
+
+def Congthuc_toado_dilui_chan_sau(t, TM, s, h, a, b):
+    '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
+    if (t < TM):
+        Ps = -s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) + s/2
+        Ph = - H 
+    if (t >= TM and t < 3*TM/2 + b):
+        Ps = -s*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM)) + s/2
+        Ph = - H + 2*h*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM))
+    if (t  >= 3*TM/2 + b):
+        Ps = -s*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM)) + s/2
+        Ph = - H + 2*h*(1 - (t - TM)/TM + 1/(4*pi)*sin(4*pi*(t - TM)/TM))
+    toa_do = [Ps,Ph]
+    return toa_do

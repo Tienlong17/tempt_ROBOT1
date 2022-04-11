@@ -1,5 +1,5 @@
 import pygame
-import test_thu_ham_ve
+import main_moudle
 
 pygame.init()
 pygame.display.set_caption('Code-mau-giao-dien')
@@ -26,23 +26,23 @@ while running:
 			if event.button == 1:
 				if (120 < mouse_x < 170) and (330 < mouse_y < 380):
 					'''Di toi '''
-					test_thu_ham_ve.in_ra(1)
+					main_moudle.Di_chuyen(1)
 
 				if (120 < mouse_x < 170) and (470 < mouse_y < 520):
 					'''Di lui '''
-					test_thu_ham_ve.in_ra(2)
+					main_moudle.Di_chuyen(2)
 
 				if (50 < mouse_x < 100) and (400 < mouse_y < 450):
 					'''Di trai '''
-					test_thu_ham_ve.in_ra(3)
+					main_moudle.Di_chuyen(3)
 
 				if (190 < mouse_x < 240) and (400 < mouse_y < 450):
 					'''Di phai '''
-					test_thu_ham_ve.in_ra(4)
+					main_moudle.Di_chuyen(4)
 
 				if (120 < mouse_x < 170) and (400 < mouse_y < 450):
 					'''Dung lai'''
-					test_thu_ham_ve.in_ra(5)
+					main_moudle.Di_chuyen(5)
 		if event.type == pygame.QUIT:
 			running = False
 				

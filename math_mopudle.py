@@ -2,21 +2,11 @@
 from math import degrees, pi, sin, cos, sin, asin, acos, atan, atan2, sqrt, radians
 import numpy as np
 import time
-import matplotlib.pyplot as plt
 #information detail Robot
 L1 = 7
 L2 = 20
 L3 = 21
 H = 15 #day la chieu cao dat lam gia tri khi dung tinh tu khop 1 den khau cuoi cung
-
-A =[]
-B =[]
-
-C =[]
-D =[]
-
-E =[]
-F =[]
 
 _a = [7.4, -26.75, 5.5]
 a = np.array(_a)
@@ -67,17 +57,12 @@ def IK(x: float, y: float , z: float):
     
     return(theta)
 
-def Dangdi():
-    t =int(input("Nhap 1: crwal \ Nhap 2: trot  Ban chon: "))
-    if t == 1:
-        print("ban chon kieu di crawl, chua viet")
-    if t == 2:
-        print("ban chon kieu di trot")
-        a = int(input("Nhap 1: Di toi \ Nhap -1: Di lui \ Nhap 2: xoay trai \ Nhap -2: xoay phai: Ban chon "))
-        Di_chhuyen(a)
+def Dangdi_trot(a):
+    if a == 1:
+        Di_toi_trot(a)
         
 
-def Di_chhuyen(a):
+def Di_toi_trot(a):
     '''Ham nay de di toi lui'''
     # a la bien di toi di lui re trai re phai 
     
@@ -93,15 +78,18 @@ def Thoi_gian(TM, s, h, a, b):
     # do phan giai thoi gian 
     for t in np.arange(0, 2*TM + b, b):
         if (t < TM/2):
-            print("Dang o nua chu ki 1: t =", t )
+            print("Dang o nua chu ki di toi 1: t =", t )
             time.sleep(b)
             Quydao_trot(t, TM, s, h, a, b)
-        if (t >= TM/2 and t < (TM + b)):
-            print("Dang o nua chu ki 2: t =", t )
+        if (TM/2 <= t < TM ):
+            print("Dang o nua chu ki di toi 2: t =", t )
             time.sleep(b)
             Quydao_trot(t, TM, s, h, a, b)
-        if (t  >= TM + b):
-            print("Dang o  chu ki di ve: t =", t)
+        if (TM  <= t < (3*TM/2)):
+            print("Dang o  nua chu ki di ve 1: t =", t)
+            Quydao_trot(t, TM, s, h, a, b)
+        if ((3*TM/2) <= t <= (2*TM)):
+            print("Dang o  nua chu ki di ve 2: t =", t)
             Quydao_trot(t, TM, s, h, a, b)
 
 
@@ -114,44 +102,27 @@ def Quydao_trot(t, TM, s, h, a, b):
         y1 = round(Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b)[1],2)
         print("     toa do cua khau cuoi 1: x =", x1,", y =", y1,", z =", z1)
         IK(x1, y1, z1)
-        if(t < TM + b):
-            A.append(y1)
-            B.append(z1)
-        if(t >= TM + b and t < 2.5*TM/2):
-            C.append(y1)
-            D.append(z1)
 
         x2 = L1
         z2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[0],2)
         y2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[1],2)
         print("     toa do cua khau cuoi 2: x =", x2,", y =", y2,", z =", z2)
         IK(x2, y2, z2)
-        if(t < TM + b):
-            E.append(y2)
-            F.append(z2)
-    
-    if(a == -1):
-        '''Neu a == 1 thi di lui '''
+
+    if(a == 2):
+        '''Neu a == 2 thi di lui '''
         x1 = -L1
         z1 = round(Congthuc_toado_dilui_chan_truoc(t, TM, s, h, a, b)[0],2)
         y1 = round(Congthuc_toado_dilui_chan_truoc(t, TM, s, h, a, b)[1],2)
         print("     toa do cua khau cuoi 1: x =", x1,", y =", y1,", z =", z1)
         IK(x1, y1, z1)
-        if(t < TM + b):
-            A.append(y1)
-            B.append(z1)
-        if(t >= TM + b and t < 2.5*TM/2):
-            C.append(y1)
-            D.append(z1)
+
 
         x2 = L1
         z2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[0],2)
         y2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[1],2)
         print("     toa do cua khau cuoi 2: x =", x2,", y =", y2,", z =", z2)
-        IK(x2, y2, z2)
-        if(t < TM + b):
-            E.append(y2)
-            F.append(z2)
+
     
     if(a == 2):
         a = 0
@@ -161,10 +132,13 @@ def Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b):
     if (t < TM/2):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
         Ph = - H + 2*h*(t/TM - 1/(4*pi)*sin(4*pi*t/TM))
-    if (t >= TM/2 and t < TM + b):
+    if (TM/2 <= t < TM):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
         Ph = - H + 2*h*(1 - t/TM + 1/(4*pi)*sin(4*pi*t/TM))
-    if (t  >= TM + b):
+    if (TM <= t < (3*TM/2)):
+        Ps = s*((2*TM - t)/TM - 1/(4*pi)*sin(4*pi*(2*TM - t)/TM)) - s/2
+        Ph = - H 
+    if ((3*TM/2) <= t <= 2*TM ):
         Ps = s*((2*TM - t)/TM - 1/(4*pi)*sin(4*pi*(2*TM - t)/TM)) - s/2
         Ph = - H 
     toa_do = [Ps,Ph]
@@ -175,10 +149,10 @@ def Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b):
     if (t < TM):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
         Ph = - H 
-    if (t >= TM and t < 3*TM/2 + b):
+    if (TM <= t < 3*TM/2 ):
         Ps = s*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM)) - s/2
         Ph = - H + 2*h*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM))
-    if (t  >= 3*TM/2 + b):
+    if ((3*TM/2) <= t <= 2*TM):
         Ps = s*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM)) - s/2
         Ph = - H + 2*h*(1 - (t - TM)/TM + 1/(4*pi)*sin(4*pi*(t - TM)/TM))
     toa_do = [Ps,Ph]

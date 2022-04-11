@@ -1,4 +1,4 @@
-
+import main_moudle
 from math import degrees, pi, sin, cos, sin, asin, acos, atan, atan2, sqrt, radians
 import numpy as np
 import time
@@ -8,18 +8,13 @@ L2 = 20
 L3 = 21
 H = 15 #day la chieu cao dat lam gia tri khi dung tinh tu khop 1 den khau cuoi cung
 
-_a = [7.4, -26.75, 5.5]
-a = np.array(_a)
+
 
 def xinchao():
-    x = -7.4
-    y = -26.75
-    a = atan(y/x)
-    b = atan2(y,x)
-    c = radians(90)
-    print("a = ",a)
-    print("b = ",b)
-    print("c = ",c)
+    main_moudle.a[0] = 1
+    main_moudle.a[1] = 2
+    main_moudle.a[2] = 3
+    
 
 
 
@@ -58,11 +53,10 @@ def IK(x: float, y: float , z: float):
     return(theta)
 
 def Dangdi_trot(a):
-    if a == 1:
-        Di_toi_trot(a)
+    Di__trot(a)
         
 
-def Di_toi_trot(a):
+def Di__trot(a):
     '''Ham nay de di toi lui'''
     # a la bien di toi di lui re trai re phai 
     

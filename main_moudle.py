@@ -5,8 +5,10 @@ import numpy
 a = [-7.4, -26.75, 5.5]
 
 math_mopudle.xinchao()
-math_mopudle.IK(a[0], a[1], a[2])
+print("a = ",a)
 
-def Di_chuyen(a: int):
-    math_mopudle.Dangdi_trot(a)
+
+def Di_chuyen(type_move: int):
+    math_mopudle.Dangdi_trot(type_move)
+
 

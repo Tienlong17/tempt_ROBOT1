@@ -1,3 +1,4 @@
+from array import array
 import main_moudle
 from math import degrees, pi, sin, cos, sin, asin, acos, atan, atan2, sqrt, radians
 import numpy as np
@@ -10,10 +11,10 @@ H = 15 #day la chieu cao dat lam gia tri khi dung tinh tu khop 1 den khau cuoi c
 
 
 
-def xinchao():
-    main_moudle.a[0] = 1
-    main_moudle.a[1] = 2
-    main_moudle.a[2] = 3
+def xinchao(a):
+    a[0] = 1
+    a[1] = 2
+    a[2] = 3
     
 
 
@@ -52,76 +53,56 @@ def IK(x: float, y: float , z: float):
     
     return(theta)
 
-def Dangdi_trot(a):
-    Di__trot(a)
-        
 
-def Di__trot(a):
-    '''Ham nay de di toi lui'''
-    # a la bien di toi di lui re trai re phai 
-    
-    TM = float(input("Nhap chu ky TM = "))
-    s = float(input("Nhap chu ky s = "))
-    h = float(input("Nhap chu ky h = "))
-    b = float(input("Nhap do phan giai t = "))
-    
-    print("Di toi")
-    Thoi_gian(TM, s, h, a, b)
-
-def Thoi_gian(TM, s, h, a, b):
+def Dangdi_trot(type_move, TM, s, h, sampling_time):
     # do phan giai thoi gian 
-    for t in np.arange(0, 2*TM + b, b):
-        if (t < TM/2):
-            print("Dang o nua chu ki di toi 1: t =", t )
-            time.sleep(b)
-            Quydao_trot(t, TM, s, h, a, b)
-        if (TM/2 <= t < TM ):
-            print("Dang o nua chu ki di toi 2: t =", t )
-            time.sleep(b)
-            Quydao_trot(t, TM, s, h, a, b)
-        if (TM  <= t < (3*TM/2)):
-            print("Dang o  nua chu ki di ve 1: t =", t)
-            Quydao_trot(t, TM, s, h, a, b)
-        if ((3*TM/2) <= t <= (2*TM)):
-            print("Dang o  nua chu ki di ve 2: t =", t)
-            Quydao_trot(t, TM, s, h, a, b)
-
-
-def Quydao_trot(t, TM, s, h, a, b):
     '''N/v: goi ham toa do de tra ve cac goc cho canh tay'''
-    if (a == 1):
-        '''Neu a == 1 thi di toi '''
-        x1 = -L1
-        z1 = round(Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b)[0],2)
-        y1 = round(Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b)[1],2)
-        print("     toa do cua khau cuoi 1: x =", x1,", y =", y1,", z =", z1)
-        IK(x1, y1, z1)
 
-        x2 = L1
-        z2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[0],2)
-        y2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[1],2)
-        print("     toa do cua khau cuoi 2: x =", x2,", y =", y2,", z =", z2)
-        IK(x2, y2, z2)
-
-    if(a == 2):
-        '''Neu a == 2 thi di lui '''
-        x1 = -L1
-        z1 = round(Congthuc_toado_dilui_chan_truoc(t, TM, s, h, a, b)[0],2)
-        y1 = round(Congthuc_toado_dilui_chan_truoc(t, TM, s, h, a, b)[1],2)
-        print("     toa do cua khau cuoi 1: x =", x1,", y =", y1,", z =", z1)
-        IK(x1, y1, z1)
-
-
-        x2 = L1
-        z2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[0],2)
-        y2 = round(Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b)[1],2)
-        print("     toa do cua khau cuoi 2: x =", x2,", y =", y2,", z =", z2)
+    if type_move == 0:
+        print("dung")
+    else:
+        array =  np.arange(0, 2*TM + sampling_time, sampling_time)
+        for t in array:
+            time.sleep(sampling_time)
+            if (type_move == 1):
+                Ditoi(TM, s, h, type_move, t)
+            if(type_move == 2):
+                DiLui(TM, s, h, type_move, t)
 
     
-    if(a == 2):
-        a = 0
 
-def Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b):
+def Ditoi(TM, s, h, type_move, t):
+    '''Neu a == 1 thi di toi '''
+    x1 = -L1
+    z1 = round(Congthuc_toado_ditoi_chan_truoc(TM, s, h, t)[0],2)
+    y1 = round(Congthuc_toado_ditoi_chan_truoc( TM, s, h, t)[1],2)
+    print("     toa do cua khau cuoi 1: x =", x1,", y =", y1,", z =", z1)
+    IK(x1, y1, z1)
+
+    x2 = L1
+    z2 = round(Congthuc_toado_ditoi_chan_sau(TM, s, h, t)[0],2)
+    y2 = round(Congthuc_toado_ditoi_chan_sau(TM, s, h, t)[1],2)
+    print("     toa do cua khau cuoi 2: x =", x2,", y =", y2,", z =", z2)
+    IK(x2, y2, z2)
+
+def DiLui(TM, s, h, type_move, t):
+    '''Neu a == 2 thi di lui '''
+    x1 = -L1
+    z1 = round(Congthuc_toado_dilui_chan_truoc(TM, s, h, t )[0],2)
+    y1 = round(Congthuc_toado_dilui_chan_truoc(TM, s, h, t)[1],2)
+    print("     toa do cua khau cuoi 1: x =", x1,", y =", y1,", z =", z1)
+    IK(x1, y1, z1)
+
+
+    x2 = L1
+    z2 = round(Congthuc_toado_ditoi_chan_sau(TM, s, h, t )[0],2)
+    y2 = round(Congthuc_toado_ditoi_chan_sau(TM, s, h, t)[1],2)
+    print("     toa do cua khau cuoi 2: x =", x2,", y =", y2,", z =", z2)
+
+
+  
+
+def Congthuc_toado_ditoi_chan_truoc(TM, s, h, t):
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
     if (t < TM/2):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
@@ -138,7 +119,7 @@ def Congthuc_toado_ditoi_chan_truoc(t, TM, s, h, a, b):
     toa_do = [Ps,Ph]
     return toa_do
 
-def Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b):
+def Congthuc_toado_ditoi_chan_sau(TM, s, h, t):
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
     if (t < TM):
         Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
@@ -152,29 +133,29 @@ def Congthuc_toado_ditoi_chan_sau(t, TM, s, h, a, b):
     toa_do = [Ps,Ph]
     return toa_do
 
-def Congthuc_toado_dilui_chan_truoc(t, TM, s, h, a, b):
+def Congthuc_toado_dilui_chan_truoc(TM, s, h, t):
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
     if (t < TM/2):
         Ps = -s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) + s/2
         Ph = - H + 2*h*(t/TM - 1/(4*pi)*sin(4*pi*t/TM))
-    if (t >= TM/2 and t < TM + b):
+    if (t >= TM/2 and t <= TM ):
         Ps = -s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) + s/2
         Ph = - H + 2*h*(1 - t/TM + 1/(4*pi)*sin(4*pi*t/TM))
-    if (t  >= TM + b):
+    if (t  >= TM ):
         Ps = -s*((2*TM - t)/TM - 1/(4*pi)*sin(4*pi*(2*TM - t)/TM)) + s/2
         Ph = - H 
     toa_do = [Ps,Ph]
     return toa_do
 
-def Congthuc_toado_dilui_chan_sau(t, TM, s, h, a, b):
+def Congthuc_toado_dilui_chan_sau(TM, s, h, t):
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
     if (t < TM):
         Ps = -s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) + s/2
         Ph = - H 
-    if (t >= TM and t < 3*TM/2 + b):
+    if (t >= TM and t < 3*TM/2):
         Ps = -s*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM)) + s/2
         Ph = - H + 2*h*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM))
-    if (t  >= 3*TM/2 + b):
+    if (t  >= 3*TM/2):
         Ps = -s*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM)) + s/2
         Ph = - H + 2*h*(1 - (t - TM)/TM + 1/(4*pi)*sin(4*pi*(t - TM)/TM))
     toa_do = [Ps,Ph]

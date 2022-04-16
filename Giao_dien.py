@@ -21,19 +21,19 @@ clock = pygame.time.Clock()
 
 def get_Button(mouse_x,mouse_y):
 	x = 0
-	if (120 < mouse_x < 170) and (330 < mouse_y < 380):
+	if (120 < mouse_x < 170) and (350 < mouse_y < 400):
 		x = 1
 
-	if (120 < mouse_x < 170) and (470 < mouse_y < 520):
+	if (120 < mouse_x < 170) and (500 < mouse_y < 550):
 		x = 2
 
-	if (50 < mouse_x < 100) and (400 < mouse_y < 450):
+	if (50 < mouse_x < 100) and (430 < mouse_y < 480):
 		x = 3
 
-	if (190 < mouse_x < 240) and (400 < mouse_y < 450):
+	if (190 < mouse_x < 240) and (430 < mouse_y < 480):
 		x = 4
 
-	if (120 < mouse_x < 170) and (400 < mouse_y < 450):
+	if (120 < mouse_x < 170) and (430 < mouse_y < 480):
 		x = 0
 	return x
 
@@ -102,8 +102,8 @@ while running:
 	# 				'''Huy di toi '''
 	# 				main_moudle.Di_chuyen(1)
 
-	# 	if event.type == pygame.QUIT:
-	# 		running = False
+	if event.type == pygame.QUIT:
+		running = False
 				
 	pygame.display.flip()
 

@@ -26,7 +26,7 @@ btnHello.grid(column=1, row=1)
 # Thêm combobox
 
 combo = Combobox(window)
-combo['values'] = ("Bạn 1", "Bạn 2", "Bạn 3")
+combo['values'] = ("Trotting", "Bạn 2", "Bạn 3")
 combo.current(0)
 combo.grid(column=0, row=2 )
 
@@ -40,5 +40,20 @@ def handleButton1():
 btnHello1 = Button(window, text="Say Hello Combo", command=handleButton1)
 btnHello1.grid(column=1, row=2)
 
+#them button di chuyển
+btnUp = Button(window, text="Up", command=handleButton1)
+btnUp.grid(column=5, row=1)
+
+btnDown = Button(window, text="Down", command=handleButton1)
+btnDown.grid(column=5, row=3)
+
+btnStop = Button(window, text="Stop", command=handleButton1)
+btnStop.grid(column=5, row=2)
+
+btnLeft = Button(window, text="Left", command=handleButton1)
+btnLeft.grid(column=4, row=2)
+
+btnRight = Button(window, text="Left", command=handleButton1)
+btnRight.grid(column=6, row=2)
 
 window.mainloop()

@@ -4,10 +4,10 @@ from math import degrees, pi, sin, cos, sin, asin, acos, atan, atan2, sqrt, radi
 import numpy as np
 import time
 #information detail Robot
-L1 = 7
-L2 = 20
-L3 = 21
-H = 15 #day la chieu cao dat lam gia tri khi dung tinh tu khop 1 den khau cuoi cung
+L1 = 8
+L2 = 18.5
+L3 = 21.5
+H = 30 #day la chieu cao dat lam gia tri khi dung tinh tu khop 1 den khau cuoi cung
 
 
 
@@ -122,7 +122,7 @@ def Congthuc_toado_ditoi_chan_truoc(TM, s, h, t):
 def Congthuc_toado_ditoi_chan_sau(TM, s, h, t):
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
     if (t < TM):
-        Ps = s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) - s/2
+        Ps = -s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) + s/2
         Ph = - H 
     if (TM <= t < 3*TM/2 ):
         Ps = s*((t - TM)/TM - 1/(4*pi)*sin(4*pi*(t - TM)/TM)) - s/2
@@ -148,6 +148,7 @@ def Congthuc_toado_dilui_chan_truoc(TM, s, h, t):
     return toa_do
 
 def Congthuc_toado_dilui_chan_sau(TM, s, h, t):
+
     '''Ham nay tra toa do tinh ra tu quy dao ve cac bien x,y,z'''    
     if (t < TM):
         Ps = -s*(t/TM - 1/(4*pi)*sin(4*pi*t/TM)) + s/2
@@ -160,3 +161,6 @@ def Congthuc_toado_dilui_chan_sau(TM, s, h, t):
         Ph = - H + 2*h*(1 - (t - TM)/TM + 1/(4*pi)*sin(4*pi*(t - TM)/TM))
     toa_do = [Ps,Ph]
     return toa_do
+
+def Dangdi_crawl(type_move, TM, s, h, sampling_time):
+    print("da di toi day")

@@ -23,26 +23,26 @@ def tempt(x, y , z):
     c =x + y + z
     round(c, 2)
     print(c)
-
+number_round = 0
 def IK(x: float, y: float , z: float):
     try:
         if x > 0:
             f11 = ( -atan(y/x) - atan(sqrt(x**2 + y**2  - L1**2)/L1))
         else:
             f11 = ( atan(y/x) - atan(sqrt(x**2 + y**2  - L1**2)/L1))
-        theta_11 = round(degrees(f11), 2) #lam tron 2 chu so
-        theta_31 = round(degrees(f11),2)
+        theta_11 = round(degrees(f11), number_round) #lam tron 2 chu so
+        theta_31 = round(degrees(f11), number_round)
         
         try:
             f13 = acos((x**2 + y**2 + z**2 - L1**2 - L2**2 - L3**2)/(2*L2*L3))       
         except:
             f13 = 0
-        theta_13 = round(degrees(f13),2)
-        theta_33 = round(degrees(f13),2)
+        theta_13 = round(degrees(f13),number_round)
+        theta_33 = round(degrees(f13),number_round)
 
         f12 = atan(z/(sqrt(x**2 + y**2 + z**2 - L1**2))) - atan((L3*sin(radians(theta_13)))/(L2 + L3*cos(radians(theta_13))))
-        theta_12 = round(degrees(f12),2)
-        theta_32 = round(degrees(f12),2)
+        theta_12 = round(degrees(f12),number_round)
+        theta_32 = round(degrees(f12),number_round)
         theta = [theta_11, theta_12, theta_13, theta_31, theta_32, theta_33]
         print('     Chan truoc: goc 1 =',theta[0], ', goc 2 =',theta[1], ',goc 3 =',theta[2], end ='\n')
         #print('     Chan sau: goc 1 =',theta[3], ', goc 2 =',theta[4], ',goc 3 =',theta[5], end ='\n')

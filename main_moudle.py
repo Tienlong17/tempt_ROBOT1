@@ -3,10 +3,10 @@ from math import pi, sin, cos, asin, acos, atan2, sqrt
 import numpy
 
 a = [-7.4, -26.75, 5.5]
-TM = 2 # chu ki buoc
+TM = 1 # chu ki buoc
 s = 25 # khoang cach sai buoc chan
 h = 12 # do cao nhac chan len
-sampling_time  = 0.4 # thoi gian lay mau 
+sampling_time  = 0.1 # thoi gian lay mau 
 
 
 

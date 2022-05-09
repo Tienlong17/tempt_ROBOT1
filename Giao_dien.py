@@ -87,7 +87,8 @@ while running:
 	pygame.draw.rect(screen,color_button2,(190,430,50,50))
 
 	#Ve cac information
-	screen.blit(creat_text_word('Status Robot:'),(12,12))
+	screen.blit(creat_text_word('Name Robot:'),(12,12))
+	screen.blit(creat_text_word('Spot Quadruped Robot'),(170,12))
 	screen.blit(creat_text_word('Walking Style:'),(11,42))
 
 

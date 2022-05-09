@@ -164,3 +164,13 @@ def Congthuc_toado_dilui_chan_sau(TM, s, h, t):
 
 def Dangdi_crawl(type_move, TM, s, h, sampling_time):
     print("da di toi day")
+    if type_move == 0:
+        print(" crawl dang dung")
+    else:
+        array =  np.arange(0, 2*TM + sampling_time, sampling_time)
+        for t in array:
+            time.sleep(sampling_time)
+            if (type_move == 1):
+                Ditoi(TM, s, h, type_move, t)
+            if(type_move == 2):
+                DiLui(TM, s, h, type_move, t)

@@ -33,6 +33,7 @@ class TextButton:
 
 		if self.is_mouse_on_text():
 			text_render = font.render(self.text, True, (0,0,255))
+			pygame.draw.rect(screen,(100,100,100), (self.position[0],self.position[1],self.text_box[2],self.text_box[3]))
 			pygame.draw.line(screen, (0,0,255), (self.position[0], self.position[1] + self.text_box[3]), (self.position[0]+self.text_box[2], self.position[1] + self.text_box[3]))
 		else:
 			text_render = font.render(self.text, True, color_draw)
@@ -68,8 +69,8 @@ def get_Button(mouse_x,mouse_y):
 type_move = 0
 huong =0
 isClick = 0
-trot_button = TextButton("Trotting", (170,42))
-crawl_button = TextButton("Crawling", (260,42))
+trot_button = TextButton("   Trotting   ", (170,42))
+crawl_button = TextButton("   Crawling   ", (300,42))
 while running:		
 	clock.tick(60) # 60
 	screen.fill(Color_BackGorund)

@@ -4,9 +4,9 @@ import numpy
 
 a = [-7.4, -26.75, 5.5]
 TM = 1 # chu ki buoc
-s = 25 # khoang cach sai buoc chan
-h = 12 # do cao nhac chan len
-sampling_time  = 0.1 # thoi gian lay mau 
+s = 10 # khoang cach sai buoc chan
+h = 6 # do cao nhac chan len
+sampling_time  = 0.05 # thoi gian lay mau 
 
 
 

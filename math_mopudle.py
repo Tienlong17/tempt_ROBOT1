@@ -42,7 +42,7 @@ def IK(x: float, y: float , z: float):
 
         f12 = atan(z/(sqrt(x**2 + y**2 + z**2 - L1**2))) - atan((L3*sin(radians(theta_13)))/(L2 + L3*cos(radians(theta_13))))
         theta_12 = round(degrees(f12),number_round)
-        theta_32 = round(degrees(f12),number_round)
+        theta_32 = round(degrees(f12),0)
         theta = [theta_11, theta_12, theta_13, theta_31, theta_32, theta_33]
         print('     Chan truoc: goc 1 =',theta[0], ', goc 2 =',theta[1], ',goc 3 =',theta[2], end ='\n')
         #print('     Chan sau: goc 1 =',theta[3], ', goc 2 =',theta[4], ',goc 3 =',theta[5], end ='\n')
